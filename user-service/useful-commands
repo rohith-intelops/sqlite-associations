@@ -1,0 +1,252 @@
+
+
+
+
+# Curl commands for REST Server resource User
+
+# Post
+```
+curl -X POST -H "Content-Type: application/json" \
+-d '{"EmailId": "sample string","Name": "sample string"}' \
+http://localhost:1337/v1/users
+```
+
+
+# Get
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/users
+```
+
+
+# Put
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"EmailId": "sample string","Name": "sample string"}' \
+http://localhost:1337/v1/users/123
+```
+# Put
+### wrong id passed in param
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"EmailId": "sample string","Name": "sample string"}' \
+http://localhost:1337/v1/users/1234
+```
+
+
+# Get  (retrieve specific User)
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/users/123
+```
+
+
+# Delete
+```
+curl -X DELETE -H "Content-Type: application/json" \
+http://localhost:1337/v1/users/123
+```
+
+
+# Curl commands for REST Server resource Post
+
+# Post
+```
+curl -X POST -H "Content-Type: application/json" \
+-d '{"Date": 1,"Message": "sample string","UserId": 1}' \
+http://localhost:1337/v1/posts
+```
+
+
+# Get
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/posts
+```
+
+
+# Put
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"UserId": 1,"Date": 1,"Message": "sample string"}' \
+http://localhost:1337/v1/posts/123
+```
+# Put
+### wrong id passed in param
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"UserId": 1,"Date": 1,"Message": "sample string"}' \
+http://localhost:1337/v1/posts/1234
+```
+
+
+# Get  (retrieve specific Post)
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/posts/123
+```
+
+
+# Delete
+```
+curl -X DELETE -H "Content-Type: application/json" \
+http://localhost:1337/v1/posts/123
+```
+
+
+# Curl commands for REST Server resource Comment
+
+# Post
+```
+curl -X POST -H "Content-Type: application/json" \
+-d '{"Comment": "sample string","PostId": 1}' \
+http://localhost:1337/v1/comments
+```
+
+
+# Get
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/comments
+```
+
+
+# Put
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"Comment": "sample string","PostId": 1}' \
+http://localhost:1337/v1/comments/123
+```
+# Put
+### wrong id passed in param
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"Comment": "sample string","PostId": 1}' \
+http://localhost:1337/v1/comments/1234
+```
+
+
+# Get  (retrieve specific Comment)
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/comments/123
+```
+
+
+# Delete
+```
+curl -X DELETE -H "Content-Type: application/json" \
+http://localhost:1337/v1/comments/123
+```
+
+
+# Curl commands for REST Server resource Followers
+
+# Post
+```
+curl -X POST -H "Content-Type: application/json" \
+-d '{"UserName": "sample string"}' \
+http://localhost:1337/v1/followers
+```
+
+
+# Get
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/followers
+```
+
+
+# Put
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"UserName": "sample string"}' \
+http://localhost:1337/v1/followers/123
+```
+# Put
+### wrong id passed in param
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"UserName": "sample string"}' \
+http://localhost:1337/v1/followers/1234
+```
+
+
+# Get  (retrieve specific Followers)
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/followers/123
+```
+
+
+# Delete
+```
+curl -X DELETE -H "Content-Type: application/json" \
+http://localhost:1337/v1/followers/123
+```
+
+
+# Curl commands for REST Server resource Following
+
+# Post
+```
+curl -X POST -H "Content-Type: application/json" \
+-d '{"UserName": "sample string"}' \
+http://localhost:1337/v1/followings
+```
+
+
+# Get
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/followings
+```
+
+
+# Put
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"UserName": "sample string"}' \
+http://localhost:1337/v1/followings/123
+```
+# Put
+### wrong id passed in param
+```
+curl -X PUT -H "Content-Type: application/json" \
+-d '{"Id": 123,"UserName": "sample string"}' \
+http://localhost:1337/v1/followings/1234
+```
+
+
+# Get  (retrieve specific Following)
+```
+curl -X GET -H "Content-Type: application/json" \
+http://localhost:1337/v1/followings/123
+```
+
+
+# Delete
+```
+curl -X DELETE -H "Content-Type: application/json" \
+http://localhost:1337/v1/followings/123
+```
+
+
+
+# Run mysql server in docker on local
+```
+docker run --detach --name=mysql --env="MYSQL_ROOT_PASSWORD=password" --publish 3306:3306 mysql/mysql-server:latest
+```
+# when mysql throws error about server connection, fire below commands
+#
+```
+error occurred: Error 1130: Host '172.17.0.1' is not allowed to connect to this MySQL server
+```
+# More details here - https://stackoverflow.com/a/19101356/3751443
+```
+docker exec -ti mysql bash
+mysql -u root -p ### you will be prompted for password
+SELECT host FROM mysql.user WHERE User = 'root';
+CREATE USER 'root'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+```
