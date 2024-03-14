@@ -2,6 +2,7 @@ package daos
 
 import (
 	"errors"
+
 	"github.com/rohith-intelops/socialmedia/user-service/pkg/rest/server/daos/clients/sqls"
 	"github.com/rohith-intelops/socialmedia/user-service/pkg/rest/server/models"
 	log "github.com/sirupsen/logrus"
@@ -36,10 +37,8 @@ func (userDao *UserDao) CreateUser(m *models.User) (*models.User, error) {
 	return m, nil
 }
 
-
 func (userDao *UserDao) ListUsers() ([]*models.User, error) {
 	var users []*models.User
-
 	// TODO populate associations here with your own logic - https://gorm.io/docs/belongs_to.html
 	if err := userDao.db.Find(&users).Error; err != nil {
 		log.Debugf("failed to list users: %v", err)
@@ -52,7 +51,7 @@ func (userDao *UserDao) ListUsers() ([]*models.User, error) {
 
 func (userDao *UserDao) GetUser(id int64) (*models.User, error) {
 	var m *models.User
-	if err := userDao.db.Preload("Post").Where("id = ?", id).First(&m).Error; err != nil {
+	if err := userDao.db.Preload("Post").Preload("Followers").Preload("Following").Where("id = ?", id).First(&m).Error; err != nil {
 		log.Debugf("failed to get user: %v", err)
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, sqls.ErrNotExists

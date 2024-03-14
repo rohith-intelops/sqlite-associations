@@ -10,6 +10,5 @@ type Post struct {
 
 	Message string `json:"message,omitempty"`
 
-	UserId int `json:"userId,omitempty"`
-
+	UserId int `json:"userId,omitempty" `
 }

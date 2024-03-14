@@ -51,7 +51,7 @@ func (followersDao *FollowersDao) ListFollowers() ([]*models.Followers, error) {
 
 func (followersDao *FollowersDao) GetFollowers(id int64) (*models.Followers, error) {
 	var m *models.Followers
-	if err := followersDao.db.Where("id = ?", id).First(&m).Error; err != nil {
+	if err := followersDao.db.Where("id = ?", id).Preload("Following").First(&m).Error; err != nil {
 		log.Debugf("failed to get followers: %v", err)
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, sqls.ErrNotExists
