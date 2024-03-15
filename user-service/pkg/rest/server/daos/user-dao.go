@@ -40,7 +40,7 @@ func (userDao *UserDao) CreateUser(m *models.User) (*models.User, error) {
 func (userDao *UserDao) ListUsers() ([]*models.User, error) {
 	var users []*models.User
 	// TODO populate associations here with your own logic - https://gorm.io/docs/belongs_to.html
-	if err := userDao.db.Find(&users).Error; err != nil {
+	if err := userDao.db.Preload("Post").Preload("Followers").Preload("Following").Find(&users).Error; err != nil {
 		log.Debugf("failed to list users: %v", err)
 		return nil, err
 	}

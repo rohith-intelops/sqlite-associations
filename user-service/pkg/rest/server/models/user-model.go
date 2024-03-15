@@ -10,9 +10,9 @@ type User struct {
 
 	Name string `json:"name,omitempty"`
 
-	Post []Post 
+	Post       Post       `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;foreignKey:UserId"`
 
-	Followers []Followers
+	Followers  Followers `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;foreignKey:UserId"` 
 
-	Following []Following
+	Following  Following `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;foreignKey:UserId"`
 }

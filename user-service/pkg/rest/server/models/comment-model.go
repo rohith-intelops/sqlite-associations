@@ -3,7 +3,7 @@ package models
 import "gorm.io/gorm"
 
 type Comment struct {
-	gorm.Model
+	gorm.Model `json:"-"`
 	Id int64 `gorm:"primaryKey;autoIncrement" json:"ID,omitempty"`
 
 	Comment string `json:"comment,omitempty"`
